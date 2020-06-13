@@ -1,4 +1,6 @@
 package it.andrearossi.mcitaliaapi;
 
-public interface APIObject {
+import java.io.Serializable;
+
+public interface APIObject extends Serializable {
 }

@@ -1,5 +1,7 @@
 package it.andrearossi.mcitaliaapi.requests.connection;
 
+import com.google.gson.JsonObject;
+
 import java.io.IOException;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
@@ -60,6 +62,7 @@ public class HttpConnection {
 
 			if (connection.getResponseCode() == HttpURLConnection.HTTP_OK)
 				consumer.accept(connection);
+
 		} catch (IOException e) { // | ProtocolException
 			//TODO:
 		}
