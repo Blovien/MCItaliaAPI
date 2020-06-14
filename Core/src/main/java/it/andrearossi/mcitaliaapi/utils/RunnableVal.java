@@ -37,4 +37,8 @@ public abstract class RunnableVal<T, V> implements Runnable, Supplier<V>, Consum
 	public void accept(T t) {
 		run(value);
 	}
+
+	public void setReturnable(V returnable) {
+		this.returnable = returnable;
+	}
 }

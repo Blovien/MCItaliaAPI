@@ -16,17 +16,21 @@ public class HttpConnection<T> {
 	private HttpURLConnection connection;
 	private String url;
 
+	private T t;
+
 	private String userAgent = "Mozilla";
 	private String version = "5.0";
 
-	public HttpConnection(String url, String userAgent, String version) {
+	public HttpConnection(String url, String userAgent, String version, T t) {
 		this.url = url;
 		this.userAgent = userAgent;
 		this.version = version;
+		this.t = t;
 	}
 
-	public HttpConnection(String url) {
+	public HttpConnection(String url, T t) {
 		this.url = url;
+		this.t = t;
 	}
 
 	public void connect() {
@@ -39,22 +43,22 @@ public class HttpConnection<T> {
 		}
 	}
 
-	public T get(RunnableVal<HttpURLConnection, T> runnable, T t) {
+	public T getRunnable(RunnableVal<HttpURLConnection, T> runnable) {
 		try {
 			connection.setRequestMethod("GET");
 			connection.setRequestProperty("User-Agent", userAgent + "/" + version);
 
-			if (connection.getResponseCode() == HttpURLConnection.HTTP_OK)
+			if (connection.getResponseCode() == HttpURLConnection.HTTP_OK) {
 				runnable.run(connection);
-
-			return runnable.returnable;
+			}
 		} catch (IOException e) { // | ProtocolException
+			e.printStackTrace();
 			//TODO:
 		}
-		return null;
+		return t;
 	}
 
-	public T post(RunnableVal<HttpURLConnection, T> runnable, String param, T t) {
+	public T postRunnable(RunnableVal<HttpURLConnection, T> runnable, String param) {
 		try {
 			connection.setRequestMethod("POST");
 			connection.setRequestProperty("User-Agent", userAgent + "/" + version);
@@ -65,15 +69,15 @@ public class HttpConnection<T> {
 			stream.flush();
 			stream.close();
 
-			if (connection.getResponseCode() == HttpURLConnection.HTTP_OK)
+			if (connection.getResponseCode() == HttpURLConnection.HTTP_OK) {
 				runnable.run(connection);
-
-			return runnable.returnable;
+			}
 		} catch (IOException e) { // | ProtocolException
+			e.printStackTrace();
 			//TODO:
 		}
 
-		return null;
+		return t;
 	}
 
 	public URL toURL() throws MalformedURLException {
@@ -84,4 +88,7 @@ public class HttpConnection<T> {
 		this.url = url;
 	}
 
+	public T getValue() {
+		return t;
+	}
 }
