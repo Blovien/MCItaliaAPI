@@ -5,8 +5,7 @@ import com.google.gson.FieldAttributes;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.annotations.Expose;
-import it.andrearossi.mcitaliaapi.exceptions.MCItaliaAPIExceptionHandler;
-import it.andrearossi.mcitaliaapi.server.Server;
+import it.andrearossi.mcitaliaapi.exceptions.APIExceptionManager;
 
 import java.lang.reflect.Modifier;
 
@@ -45,10 +44,13 @@ public class MCItaliaAPI {
 		gson = builder.create();
 	}
 
-	private final MCItaliaAPIExceptionHandler exceptionHandler;
+	private APIExceptionManager exceptionManager;
 
 	public MCItaliaAPI() {
-		this.exceptionHandler = new MCItaliaAPIExceptionHandler();
+	}
+
+	public void setExceptionManager(APIExceptionManager exceptionManager) {
+		this.exceptionManager = exceptionManager;
 	}
 
 	public static MCItaliaAPI getInstance() {
@@ -59,7 +61,7 @@ public class MCItaliaAPI {
 		return gson;
 	}
 
-	public MCItaliaAPIExceptionHandler getExceptionHandler() {
-		return exceptionHandler;
+	public APIExceptionManager getExceptionHandler() {
+		return exceptionManager == null ? new APIExceptionManager() : exceptionManager;
 	}
 }

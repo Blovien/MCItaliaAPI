@@ -1,5 +1,6 @@
 package it.andrearossi.mcitaliaapi.requests.connection;
 
+import it.andrearossi.mcitaliaapi.MCItaliaAPI;
 import it.andrearossi.mcitaliaapi.utils.RunnableVal;
 
 import java.io.IOException;
@@ -31,7 +32,8 @@ public class HttpConnection<T> {
 		try {
 			this.t = t.getDeclaredConstructor().newInstance();
 		} catch (InstantiationException | IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
-			e.printStackTrace();
+			MCItaliaAPI.getInstance().getExceptionHandler()
+					.exception(e);
 		}
 	}
 
@@ -39,6 +41,8 @@ public class HttpConnection<T> {
 		try {
 			this.connection = (HttpURLConnection) toURL().openConnection();
 		} catch (IOException e) {
+			MCItaliaAPI.getInstance().getExceptionHandler()
+					.exception(e);
 			//TODO:
 			// MCItaliaAPI.getInstance().getExceptionHandler()
 			// 							.exception(e).handle(...);
@@ -54,8 +58,8 @@ public class HttpConnection<T> {
 				runnable.run(connection);
 			}
 		} catch (IOException e) { // | ProtocolException
-			e.printStackTrace();
-			//TODO:
+			MCItaliaAPI.getInstance().getExceptionHandler()
+					.exception(e);
 		}
 		return t;
 	}
@@ -75,8 +79,8 @@ public class HttpConnection<T> {
 				runnable.run(connection);
 			}
 		} catch (IOException e) { // | ProtocolException
-			e.printStackTrace();
-			//TODO:
+			MCItaliaAPI.getInstance().getExceptionHandler()
+					.exception(e);
 		}
 
 		return t;

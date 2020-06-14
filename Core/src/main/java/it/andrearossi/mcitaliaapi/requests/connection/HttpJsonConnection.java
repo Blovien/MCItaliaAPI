@@ -29,7 +29,8 @@ public class HttpJsonConnection extends HttpAbstractConnection<JsonObject> {
 					JsonElement jsonElement = MCItaliaAPI.getGson().fromJson(json, JsonElement.class);
 					setValue(jsonElement.getAsJsonObject());
 				} catch (IOException e) {
-					e.printStackTrace();
+					MCItaliaAPI.getInstance().getExceptionHandler()
+							.exception(e);
 				}
 			}
 		};

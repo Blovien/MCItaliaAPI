@@ -1,5 +1,6 @@
 package it.andrearossi.mcitaliaapi.requests.connection;
 
+import it.andrearossi.mcitaliaapi.MCItaliaAPI;
 import it.andrearossi.mcitaliaapi.utils.RunnableVal;
 
 import java.io.BufferedReader;
@@ -32,7 +33,8 @@ public class HttpDefaultConnection extends HttpAbstractConnection<StringBuilder>
 
 					reader.close();
 				} catch (IOException e) {
-					e.printStackTrace();
+					MCItaliaAPI.getInstance().getExceptionHandler()
+							.exception(e);
 				}
 			}
 		};
