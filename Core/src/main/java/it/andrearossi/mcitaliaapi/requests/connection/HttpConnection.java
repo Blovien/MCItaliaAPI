@@ -1,15 +1,13 @@
 package it.andrearossi.mcitaliaapi.requests.connection;
 
-import com.google.gson.JsonObject;
 import it.andrearossi.mcitaliaapi.utils.RunnableVal;
-import it.andrearossi.mcitaliaapi.utils.RunnableVal2;
 
 import java.io.IOException;
 import java.io.OutputStream;
+import java.lang.reflect.InvocationTargetException;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.function.Consumer;
 
 public class HttpConnection<T> {
 
@@ -18,19 +16,23 @@ public class HttpConnection<T> {
 
 	private T t;
 
-	private String userAgent = "Mozilla";
-	private String version = "5.0";
+	private final String userAgent;
+	private final String version;
 
-	public HttpConnection(String url, String userAgent, String version, T t) {
+	public HttpConnection(String url, Class<T> t) {
+		this(url, "Mozilla", "5.0", t);
+	}
+
+	public HttpConnection(String url, String userAgent, String version, Class<T> t) {
 		this.url = url;
 		this.userAgent = userAgent;
 		this.version = version;
-		this.t = t;
-	}
 
-	public HttpConnection(String url, T t) {
-		this.url = url;
-		this.t = t;
+		try {
+			this.t = t.getDeclaredConstructor().newInstance();
+		} catch (InstantiationException | IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
+			e.printStackTrace();
+		}
 	}
 
 	public void connect() {
@@ -90,5 +92,9 @@ public class HttpConnection<T> {
 
 	public T getValue() {
 		return t;
+	}
+
+	public void setValue(T t) {
+		this.t = t;
 	}
 }

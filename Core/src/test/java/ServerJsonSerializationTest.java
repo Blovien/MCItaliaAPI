@@ -13,6 +13,7 @@ public class ServerJsonSerializationTest {
 
 	public static void main(String[] args) {
 		HttpConnectionTest.connectionDefault();
+		HttpConnectionTest.connectionJson();
 		serializeServer();
 		deserializeServer();
 	}
