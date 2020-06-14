@@ -1,6 +1,8 @@
 package it.andrearossi.mcitaliaapi.requests.connection;
 
 import com.google.gson.JsonObject;
+import it.andrearossi.mcitaliaapi.utils.RunnableVal;
+import it.andrearossi.mcitaliaapi.utils.RunnableVal2;
 
 import java.io.IOException;
 import java.io.OutputStream;
@@ -9,7 +11,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.function.Consumer;
 
-public class HttpConnection {
+public class HttpConnection<T> {
 
 	private HttpURLConnection connection;
 	private String url;
@@ -37,19 +39,22 @@ public class HttpConnection {
 		}
 	}
 
-	public void get(Consumer<HttpURLConnection> consumer) {
+	public T get(RunnableVal<HttpURLConnection, T> runnable, T t) {
 		try {
 			connection.setRequestMethod("GET");
 			connection.setRequestProperty("User-Agent", userAgent + "/" + version);
 
 			if (connection.getResponseCode() == HttpURLConnection.HTTP_OK)
-				consumer.accept(connection);
+				runnable.run(connection);
+
+			return runnable.returnable;
 		} catch (IOException e) { // | ProtocolException
 			//TODO:
 		}
+		return null;
 	}
 
-	public void post(Consumer<HttpURLConnection> consumer, String param) {
+	public T post(RunnableVal<HttpURLConnection, T> runnable, String param, T t) {
 		try {
 			connection.setRequestMethod("POST");
 			connection.setRequestProperty("User-Agent", userAgent + "/" + version);
@@ -61,11 +66,14 @@ public class HttpConnection {
 			stream.close();
 
 			if (connection.getResponseCode() == HttpURLConnection.HTTP_OK)
-				consumer.accept(connection);
+				runnable.run(connection);
 
+			return runnable.returnable;
 		} catch (IOException e) { // | ProtocolException
 			//TODO:
 		}
+
+		return null;
 	}
 
 	public URL toURL() throws MalformedURLException {

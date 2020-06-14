@@ -11,4 +11,12 @@ public class User implements APIObject {
 		this.uuid = uuid;
 		this.username = username;
 	}
+
+	public String getUsername() {
+		return username;
+	}
+
+	public String getUuid() {
+		return uuid;
+	}
 }
