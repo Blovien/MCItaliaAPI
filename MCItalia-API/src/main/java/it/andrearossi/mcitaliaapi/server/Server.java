@@ -8,6 +8,9 @@ import it.andrearossi.mcitaliaapi.utils.Ignore;
 import java.util.Map;
 import java.util.Optional;
 
+/**
+ *
+ */
 public class Server implements APIObject {
 
 	// Ignored variables in Serialization
@@ -62,6 +65,28 @@ public class Server implements APIObject {
 
 	private final String[] categories;
 
+	/**
+	 * Object representing a Server in the server list of Minecraft Italia
+	 *
+	 * @param status
+	 * @param id
+	 * @param serverId
+	 * @param title
+	 * @param address
+	 * @param position
+	 * @param hidden
+	 * @param votes
+	 * @param votesToday
+	 * @param description
+	 * @param versionString
+	 * @param versions
+	 * @param online
+	 * @param players
+	 * @param maxPlayers
+	 * @param slot
+	 * @param staff
+	 * @param categories
+	 */
 	public Server(
 			String status,
 			int id,
