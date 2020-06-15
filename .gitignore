@@ -24,9 +24,9 @@ hs_err_pid*
 
 # Intellij IDEA
 
-*.xml
-*.iml
+**/*.xml
+**/*.iml
 
-.idea/
+.idea/*
 
-Core/target
+Core/target/*
