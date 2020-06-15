@@ -1,6 +1,7 @@
 package it.andrearossi.mcitaliaapi.requests.connection;
 
 import it.andrearossi.mcitaliaapi.MCItaliaAPI;
+import it.andrearossi.mcitaliaapi.exceptions.APIExceptionHandler;
 import it.andrearossi.mcitaliaapi.utils.RunnableVal;
 
 import java.io.IOException;
@@ -20,6 +21,8 @@ public class HttpConnection<T> {
 	private final String userAgent;
 	private final String version;
 
+	private final APIExceptionHandler exceptionHandler = MCItaliaAPI.getExceptionHandler();
+
 	public HttpConnection(String url, Class<T> t) {
 		this(url, "Mozilla", "5.0", t);
 	}
@@ -32,8 +35,7 @@ public class HttpConnection<T> {
 		try {
 			this.t = t.getDeclaredConstructor().newInstance();
 		} catch (InstantiationException | IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
-			MCItaliaAPI.getInstance().getExceptionHandler()
-					.exception(e);
+			exceptionHandler.exception(e).handle();
 		}
 	}
 
@@ -41,11 +43,7 @@ public class HttpConnection<T> {
 		try {
 			this.connection = (HttpURLConnection) toURL().openConnection();
 		} catch (IOException e) {
-			MCItaliaAPI.getInstance().getExceptionHandler()
-					.exception(e);
-			//TODO:
-			// MCItaliaAPI.getInstance().getExceptionHandler()
-			// 							.exception(e).handle(...);
+			exceptionHandler.exception(e).handle();
 		}
 	}
 
@@ -54,12 +52,11 @@ public class HttpConnection<T> {
 			connection.setRequestMethod("GET");
 			connection.setRequestProperty("User-Agent", userAgent + "/" + version);
 
-			if (connection.getResponseCode() == HttpURLConnection.HTTP_OK) {
+			if (connection.getResponseCode() == HttpURLConnection.HTTP_OK)
 				runnable.run(connection);
-			}
-		} catch (IOException e) { // | ProtocolException
-			MCItaliaAPI.getInstance().getExceptionHandler()
-					.exception(e);
+
+		} catch (IOException e) {
+			exceptionHandler.exception(e).handle();
 		}
 		return t;
 	}
@@ -75,12 +72,11 @@ public class HttpConnection<T> {
 			stream.flush();
 			stream.close();
 
-			if (connection.getResponseCode() == HttpURLConnection.HTTP_OK) {
+			if (connection.getResponseCode() == HttpURLConnection.HTTP_OK)
 				runnable.run(connection);
-			}
-		} catch (IOException e) { // | ProtocolException
-			MCItaliaAPI.getInstance().getExceptionHandler()
-					.exception(e);
+
+		} catch (IOException e) {
+			exceptionHandler.exception(e).handle();
 		}
 
 		return t;

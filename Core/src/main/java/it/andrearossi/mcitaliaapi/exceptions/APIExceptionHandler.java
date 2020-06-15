@@ -3,15 +3,12 @@ package it.andrearossi.mcitaliaapi.exceptions;
 import it.andrearossi.mcitaliaapi.utils.DoubleRunnable;
 
 import java.io.IOException;
-import java.net.MalformedURLException;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.function.Consumer;
-import java.util.function.DoubleConsumer;
 
 public abstract class APIExceptionHandler {
 
-	enum ErrorCase {
+	public enum ErrorCase {
 		UNKNOWN,
 		IO_EXCEPTION,
 		REFLECTIVE_EXCEPTION
@@ -38,10 +35,10 @@ public abstract class APIExceptionHandler {
 		return this;
 	}
 
-	public void handle(DoubleRunnable<ErrorCase, Exception> doubleRunnable) {
+	public void handle() {
 		if (!errorCase.isEmpty()) {
 			for (Map.Entry<ErrorCase, Exception> error : errorCase.entrySet()) {
-				doubleRunnable.run(error.getKey(), error.getValue());
+				runnableAdapter().run(error.getKey(), error.getValue());
 			}
 		}
 	}

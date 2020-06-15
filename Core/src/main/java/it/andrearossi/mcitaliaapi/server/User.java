@@ -1,8 +1,12 @@
 package it.andrearossi.mcitaliaapi.server;
 
 import it.andrearossi.mcitaliaapi.APIObject;
+import it.andrearossi.mcitaliaapi.utils.Ignore;
 
 public class User implements APIObject {
+
+	@Ignore
+	private String avatarURL = "https://minepic.org/avatar/";
 
 	private String uuid;
 	private String username;
@@ -18,5 +22,9 @@ public class User implements APIObject {
 
 	public String getUuid() {
 		return uuid;
+	}
+
+	public String getAvatarURL(String size) {
+		return avatarURL + size + "/" + uuid;
 	}
 }

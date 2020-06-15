@@ -3,13 +3,17 @@ package it.andrearossi.mcitaliaapi.server;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import it.andrearossi.mcitaliaapi.APIObject;
+import it.andrearossi.mcitaliaapi.utils.Ignore;
 
 import java.util.Map;
+import java.util.Optional;
 
 public class Server implements APIObject {
 
-	@Expose
-	private static String faviconUrl;
+	// Ignored variables in Serialization
+
+	@Ignore
+	private String faviconUrl;
 
 	// Serialized Variables
 
@@ -57,7 +61,6 @@ public class Server implements APIObject {
 	private final Map<String, User[]> staff;
 
 	private final String[] categories;
-
 
 	public Server(
 			String status,
@@ -121,7 +124,7 @@ public class Server implements APIObject {
 			String[] categories
 	) {
 		this(status, id, serverId, title, address, position, hidden, votes, votesToday, description, versionString, versions, online, players, maxPlayers, slot, staff, categories);
-		Server.faviconUrl = faviconUrl;
+		this.faviconUrl = Optional.ofNullable(faviconUrl).orElse("");
 	}
 
 	public int getId() {
@@ -196,7 +199,7 @@ public class Server implements APIObject {
 		return online;
 	}
 
-	public static String getFaviconUrl() {
+	public String getFaviconUrl() {
 		return faviconUrl;
 	}
 }
