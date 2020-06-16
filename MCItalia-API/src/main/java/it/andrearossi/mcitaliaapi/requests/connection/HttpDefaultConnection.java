@@ -33,8 +33,7 @@ public class HttpDefaultConnection extends HttpAbstractConnection<StringBuilder>
 
 					reader.close();
 				} catch (IOException e) {
-					MCItaliaAPI.getInstance().getExceptionHandler()
-							.exception(e);
+					MCItaliaAPI.getExceptionHandler().exception(e).handle();
 				}
 			}
 		};

@@ -3,6 +3,7 @@ package it.andrearossi.mcitaliaapi.server;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import it.andrearossi.mcitaliaapi.APIObject;
+import it.andrearossi.mcitaliaapi.utils.Costants;
 import it.andrearossi.mcitaliaapi.utils.Ignore;
 
 import java.util.Map;
@@ -17,6 +18,9 @@ public class Server implements APIObject {
 
 	@Ignore
 	private String faviconUrl;
+
+	@Ignore
+	private ServerPlatform platform;
 
 	// Serialized Variables
 
@@ -88,6 +92,7 @@ public class Server implements APIObject {
 	 * @param categories
 	 */
 	public Server(
+			String faviconUrl,
 			String status,
 			int id,
 			String serverId,
@@ -107,6 +112,8 @@ public class Server implements APIObject {
 			Map<String, User[]> staff,
 			String[] categories
 	) {
+		this.faviconUrl = Optional.ofNullable(faviconUrl).orElse("");
+		this.platform = ServerPlatform.JAVA;
 		this.status = status;
 		this.id = id;
 		this.serverId = serverId;
@@ -128,7 +135,6 @@ public class Server implements APIObject {
 	}
 
 	public Server (
-			String faviconUrl,
 			String status,
 			int id,
 			String serverId,
@@ -148,8 +154,7 @@ public class Server implements APIObject {
 			Map<String, User[]> staff,
 			String[] categories
 	) {
-		this(status, id, serverId, title, address, position, hidden, votes, votesToday, description, versionString, versions, online, players, maxPlayers, slot, staff, categories);
-		this.faviconUrl = Optional.ofNullable(faviconUrl).orElse("");
+		this(null, status, id, serverId, title, address, position, hidden, votes, votesToday, description, versionString, versions, online, players, maxPlayers, slot, staff, categories);
 	}
 
 	public int getId() {
@@ -225,6 +230,10 @@ public class Server implements APIObject {
 	}
 
 	public String getFaviconUrl() {
-		return faviconUrl;
+		return Optional.ofNullable(faviconUrl).orElse(Costants.FAVICON_URL + serverId);
+	}
+
+	public ServerPlatform getPlatform() {
+		return platform;
 	}
 }

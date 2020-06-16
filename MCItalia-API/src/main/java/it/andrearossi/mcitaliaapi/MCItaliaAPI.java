@@ -1,12 +1,10 @@
 package it.andrearossi.mcitaliaapi;
 
-import com.google.gson.ExclusionStrategy;
-import com.google.gson.FieldAttributes;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
+import com.google.gson.*;
 import com.google.gson.annotations.Expose;
 import it.andrearossi.mcitaliaapi.exceptions.APIExceptionHandler;
 import it.andrearossi.mcitaliaapi.exceptions.APIExceptionManager;
+import it.andrearossi.mcitaliaapi.server.Server;
 import it.andrearossi.mcitaliaapi.utils.Ignore;
 
 import java.lang.reflect.Modifier;
@@ -66,8 +64,12 @@ public class MCItaliaAPI {
 		STABLE_API = false;
 	}
 
-	public static Gson getGson() {
+	protected static Gson getGson() {
 		return gson;
+	}
+
+	public static Server getServer(JsonObject server) {
+		return getGson().fromJson(server, Server.class);
 	}
 
 	public static APIExceptionHandler getExceptionHandler() {
