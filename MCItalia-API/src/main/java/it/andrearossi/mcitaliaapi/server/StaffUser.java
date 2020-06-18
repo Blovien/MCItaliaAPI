@@ -4,12 +4,12 @@ import it.andrearossi.mcitaliaapi.APIObject;
 import it.andrearossi.mcitaliaapi.utils.Costants;
 import it.andrearossi.mcitaliaapi.utils.Ignore;
 
-public class User implements APIObject {
+public class StaffUser implements APIObject {
 
 	private String uuid;
 	private String username;
 
-	public User(String uuid, String username) {
+	public StaffUser(String uuid, String username) {
 		this.uuid = uuid;
 		this.username = username;
 	}
