@@ -4,7 +4,9 @@ import com.google.gson.*;
 import com.google.gson.annotations.Expose;
 import it.andrearossi.mcitaliaapi.exceptions.APIExceptionHandler;
 import it.andrearossi.mcitaliaapi.exceptions.APIExceptionManager;
+import it.andrearossi.mcitaliaapi.requests.connection.HttpDefaultConnection;
 import it.andrearossi.mcitaliaapi.server.Server;
+import it.andrearossi.mcitaliaapi.utils.Constants;
 import it.andrearossi.mcitaliaapi.utils.Ignore;
 
 import java.lang.reflect.Modifier;
@@ -19,6 +21,8 @@ public class MCItaliaAPI {
 	private static final Gson gson;
 
 	static {
+		// GSON INITIALIZATION
+
 		instance = new MCItaliaAPI();
 
 		GsonBuilder builder = new GsonBuilder()
@@ -64,12 +68,8 @@ public class MCItaliaAPI {
 		STABLE_API = false;
 	}
 
-	protected static Gson getGson() {
+	public static Gson getGson() {
 		return gson;
-	}
-
-	public static Server getServer(JsonObject server) {
-		return getGson().fromJson(server, Server.class);
 	}
 
 	public static APIExceptionHandler getExceptionHandler() {

@@ -3,7 +3,7 @@ import com.google.gson.JsonObject;
 import it.andrearossi.mcitaliaapi.MCItaliaAPI;
 import it.andrearossi.mcitaliaapi.requests.connection.HttpDefaultConnection;
 import it.andrearossi.mcitaliaapi.server.Server;
-import it.andrearossi.mcitaliaapi.server.User;
+import it.andrearossi.mcitaliaapi.server.StaffUser;
 import org.junit.jupiter.api.Test;
 
 import java.util.HashMap;
@@ -20,8 +20,8 @@ public class ServerJsonSerializationTest {
 
 	@Test
 	public static void serializeServer() {
-		Map<String, User[]> map = new HashMap<>();
-		map.put("ciao", new User[]{new User("ciao", "no"), new User("salve", "no")});
+		Map<String, StaffUser[]> map = new HashMap<>();
+		map.put("ciao", new StaffUser[]{new StaffUser("ciao", "no"), new StaffUser("salve", "no")});
 
 		Server server = new Server(
 				"not visible in serialization",

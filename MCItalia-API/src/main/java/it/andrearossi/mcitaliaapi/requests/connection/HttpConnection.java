@@ -34,15 +34,8 @@ public class HttpConnection<T> {
 
 		try {
 			this.t = t.getDeclaredConstructor().newInstance();
-		} catch (InstantiationException | IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
-			exceptionHandler.exception(e).handle();
-		}
-	}
-
-	public void connect() {
-		try {
 			this.connection = (HttpURLConnection) toURL().openConnection();
-		} catch (IOException e) {
+		} catch (InstantiationException | IllegalAccessException | InvocationTargetException | NoSuchMethodException | IOException e) {
 			exceptionHandler.exception(e).handle();
 		}
 	}

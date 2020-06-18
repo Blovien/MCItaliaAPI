@@ -1,8 +1,7 @@
 package it.andrearossi.mcitaliaapi.server;
 
-import it.andrearossi.mcitaliaapi.APIObject;
-import it.andrearossi.mcitaliaapi.utils.Costants;
-import it.andrearossi.mcitaliaapi.utils.Ignore;
+import it.andrearossi.mcitaliaapi.utils.html.APIObject;
+import it.andrearossi.mcitaliaapi.utils.Constants;
 
 public class StaffUser implements APIObject {
 
@@ -23,6 +22,6 @@ public class StaffUser implements APIObject {
 	}
 
 	public String getAvatarURL(String size) {
-		return Costants.AVATAR_URL + size + "/" + uuid;
+		return Constants.AVATAR_URL + size + "/" + uuid;
 	}
 }

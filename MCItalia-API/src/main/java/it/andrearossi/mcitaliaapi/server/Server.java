@@ -1,13 +1,15 @@
 package it.andrearossi.mcitaliaapi.server;
 
-import com.google.gson.annotations.Expose;
+import com.google.gson.JsonObject;
 import com.google.gson.annotations.SerializedName;
-import it.andrearossi.mcitaliaapi.APIObject;
-import it.andrearossi.mcitaliaapi.utils.Costants;
+import it.andrearossi.mcitaliaapi.utils.html.APIObject;
+import it.andrearossi.mcitaliaapi.MCItaliaAPI;
+import it.andrearossi.mcitaliaapi.utils.Constants;
 import it.andrearossi.mcitaliaapi.utils.Ignore;
 
 import java.util.Map;
-import java.util.Optional;
+
+import static java.util.Optional.ofNullable;
 
 /**
  *
@@ -31,7 +33,7 @@ public class Server implements APIObject {
 
 	private final String status;
 
-	private final int id;
+	private final short id;
 
 	@SerializedName(SERVER_ID_FIELD)
 	private final String serverId;
@@ -65,7 +67,7 @@ public class Server implements APIObject {
 
 	private final int slot;
 
-	private final Map<String, User[]> staff;
+	private final Map<String, StaffUser[]> staff;
 
 	private final String[] categories;
 
@@ -94,7 +96,7 @@ public class Server implements APIObject {
 	public Server(
 			String faviconUrl,
 			String status,
-			int id,
+			short id,
 			String serverId,
 			String title,
 			String address,
@@ -109,10 +111,10 @@ public class Server implements APIObject {
 			int players,
 			int maxPlayers,
 			int slot,
-			Map<String, User[]> staff,
+			Map<String, StaffUser[]> staff,
 			String[] categories
 	) {
-		this.faviconUrl = Optional.ofNullable(faviconUrl).orElse("");
+		this.faviconUrl = ofNullable(faviconUrl).orElse("");
 		this.platform = ServerPlatform.JAVA;
 		this.status = status;
 		this.id = id;
@@ -136,7 +138,7 @@ public class Server implements APIObject {
 
 	public Server (
 			String status,
-			int id,
+			short id,
 			String serverId,
 			String title,
 			String address,
@@ -151,13 +153,17 @@ public class Server implements APIObject {
 			int players,
 			int maxPlayers,
 			int slot,
-			Map<String, User[]> staff,
+			Map<String, StaffUser[]> staff,
 			String[] categories
 	) {
 		this(null, status, id, serverId, title, address, position, hidden, votes, votesToday, description, versionString, versions, online, players, maxPlayers, slot, staff, categories);
 	}
 
-	public int getId() {
+	public static Server fromJson(JsonObject object) {
+		return MCItaliaAPI.getGson().fromJson(object, Server.class);
+	}
+
+	public short getId() {
 		return id;
 	}
 
@@ -177,7 +183,7 @@ public class Server implements APIObject {
 		return votes;
 	}
 
-	public Map<String, User[]> getStaff() {
+	public Map<String, StaffUser[]> getStaff() {
 		return staff;
 	}
 
@@ -230,7 +236,7 @@ public class Server implements APIObject {
 	}
 
 	public String getFaviconUrl() {
-		return Optional.ofNullable(faviconUrl).orElse(Costants.FAVICON_URL + serverId);
+		return ofNullable(faviconUrl).orElse(Constants.API_URL + "server/" + serverId);
 	}
 
 	public ServerPlatform getPlatform() {

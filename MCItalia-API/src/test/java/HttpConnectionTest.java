@@ -1,4 +1,5 @@
 import com.google.gson.JsonObject;
+import it.andrearossi.mcitaliaapi.crafting.CraftingList;
 import it.andrearossi.mcitaliaapi.requests.connection.HttpDefaultConnection;
 import it.andrearossi.mcitaliaapi.requests.connection.HttpJsonConnection;
 import org.junit.jupiter.api.Test;
@@ -14,7 +15,13 @@ public class HttpConnectionTest {
 
 		HttpDefaultConnection connection = new HttpDefaultConnection(url);
 
+		System.out.println(connection.get());
+
+		/*connection = new HttpDefaultConnection("https://www.minecraft-italia.it/crafting");
 		connection.connect();
+		System.out.println(connection.get());*/
+
+		connection = new HttpDefaultConnection("https://www.minecraft-italia.it/api/crafting/list");
 		System.out.println(connection.get());
 	}
 
@@ -25,7 +32,6 @@ public class HttpConnectionTest {
 
 		HttpJsonConnection connection = new HttpJsonConnection(url);
 
-		connection.connect();
 		System.out.println(connection.get());
 	}
 }
