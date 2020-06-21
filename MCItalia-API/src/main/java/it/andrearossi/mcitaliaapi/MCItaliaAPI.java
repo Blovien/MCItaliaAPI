@@ -4,10 +4,8 @@ import com.google.gson.*;
 import com.google.gson.annotations.Expose;
 import it.andrearossi.mcitaliaapi.exceptions.APIExceptionHandler;
 import it.andrearossi.mcitaliaapi.exceptions.APIExceptionManager;
-import it.andrearossi.mcitaliaapi.requests.connection.HttpDefaultConnection;
-import it.andrearossi.mcitaliaapi.server.Server;
-import it.andrearossi.mcitaliaapi.utils.Constants;
 import it.andrearossi.mcitaliaapi.utils.Ignore;
+import it.andrearossi.mcitaliaapi.utils.html.APIObject;
 
 import java.lang.reflect.Modifier;
 import java.util.Optional;
@@ -16,7 +14,7 @@ public class MCItaliaAPI {
 
 	private static final MCItaliaAPI instance;
 
-	private static boolean STABLE_API = true;
+	private boolean cacheSystem;
 
 	private static final Gson gson;
 
@@ -54,7 +52,21 @@ public class MCItaliaAPI {
 	private static APIExceptionManager exceptionManager;
 
 	public MCItaliaAPI() {
+		this(false, null);
 	}
+
+	public MCItaliaAPI(boolean cacheSystem) {
+		this(cacheSystem, null);
+	}
+
+	public MCItaliaAPI(boolean cacheSystem, Long delay) {
+		this.cacheSystem = cacheSystem;
+
+		if (cacheSystem)
+			new MCItaliaCache().init(delay);
+	}
+
+	// SETUP
 
 	public void setExceptionManager(APIExceptionManager exceptionManager) {
 		MCItaliaAPI.exceptionManager = exceptionManager;
@@ -64,11 +76,19 @@ public class MCItaliaAPI {
 		return instance;
 	}
 
-	public static void useUnstableAPI() {
-		STABLE_API = false;
+	// UTILITY
+
+	public static <T extends APIObject> T fromJson(JsonObject object, Class<T> clazz) {
+		return getGson().fromJson(object, clazz);
 	}
 
-	public static Gson getGson() {
+	public static <T> T fromJson(String object, Class<T> clazz) {
+		return getGson().fromJson(object, clazz);
+	}
+
+	// GETTERS
+
+	protected static Gson getGson() {
 		return gson;
 	}
 

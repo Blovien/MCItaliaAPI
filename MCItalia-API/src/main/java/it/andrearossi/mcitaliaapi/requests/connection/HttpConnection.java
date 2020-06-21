@@ -34,10 +34,25 @@ public class HttpConnection<T> {
 
 		try {
 			this.t = t.getDeclaredConstructor().newInstance();
-			this.connection = (HttpURLConnection) toURL().openConnection();
-		} catch (InstantiationException | IllegalAccessException | InvocationTargetException | NoSuchMethodException | IOException e) {
+		} catch (InstantiationException | IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
 			exceptionHandler.exception(e).handle();
 		}
+
+		connect();
+	}
+
+	private void connect() {
+		try {
+			this.connection = (HttpURLConnection) toURL().openConnection();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void update(String url) {
+		connection.disconnect();
+		setURL(url);
+		connect();
 	}
 
 	public T getRunnable(RunnableVal<HttpURLConnection, T> runnable) {
@@ -47,6 +62,7 @@ public class HttpConnection<T> {
 
 			if (connection.getResponseCode() == HttpURLConnection.HTTP_OK)
 				runnable.run(connection);
+
 
 		} catch (IOException e) {
 			exceptionHandler.exception(e).handle();

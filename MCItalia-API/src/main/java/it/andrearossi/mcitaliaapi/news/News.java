@@ -18,5 +18,26 @@ public class News implements APIObject {
 	@SerializedName(ID_IMAGE_FIELD)
 	private short idImage;
 
+	public News(String title, String url, byte layoutType, short idImage) {
+		this.title = title;
+		this.url = url;
+		this.layoutType = layoutType;
+		this.idImage = idImage;
+	}
 
+	public String getTitle() {
+		return title;
+	}
+
+	public String getUrl() {
+		return url;
+	}
+
+	public byte getLayoutType() {
+		return layoutType;
+	}
+
+	public short getIdImage() {
+		return idImage;
+	}
 }

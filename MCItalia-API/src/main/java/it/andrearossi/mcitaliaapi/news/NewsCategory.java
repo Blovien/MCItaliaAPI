@@ -10,4 +10,12 @@ public class NewsCategory {
 		this.id = id;
 		this.name = name;
 	}
+
+	public String getName() {
+		return name;
+	}
+
+	public byte getId() {
+		return id;
+	}
 }

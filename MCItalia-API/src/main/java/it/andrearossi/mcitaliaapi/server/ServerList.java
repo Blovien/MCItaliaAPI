@@ -2,14 +2,10 @@ package it.andrearossi.mcitaliaapi.server;
 
 import it.andrearossi.mcitaliaapi.utils.html.JsonCategoryList;
 
-public class ServerList extends JsonCategoryList<Server, ServerCategory> {
+public class ServerList extends JsonCategoryList<ListedServer, ServerCategory> {
 
-	public ServerList(String status, Server[] items, ServerCategory[] categories) {
+	public ServerList(String status, ListedServer[] items, ServerCategory[] categories) {
 		super(status, items, categories);
 	}
 
-	@Deprecated
-	public ServerPlatform getPlatform() {
-		return getItems()[0].getPlatform();
-	}
 }

@@ -26,7 +26,7 @@ public class HttpJsonConnection extends HttpAbstractConnection<JsonObject> {
 				try {
 					Scanner scanner = new Scanner(connection.getURL().openStream());
 					String json = scanner.useDelimiter("\\Z").next();
-					JsonElement jsonElement = MCItaliaAPI.getGson().fromJson(json, JsonElement.class);
+					JsonElement jsonElement = MCItaliaAPI.fromJson(json, JsonElement.class);
 					setValue(jsonElement.getAsJsonObject());
 				} catch (IOException e) {
 					MCItaliaAPI.getExceptionHandler().exception(e);

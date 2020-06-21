@@ -1,6 +1,6 @@
 package it.andrearossi.mcitaliaapi.utils.html;
 
-public class JsonList<T extends APIObject> {
+public class JsonList<T extends APIObject> implements APIObject {
 
 	private final String status;
 

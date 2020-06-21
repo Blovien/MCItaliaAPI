@@ -14,15 +14,7 @@ import static java.util.Optional.ofNullable;
 /**
  *
  */
-public class Server implements APIObject {
-
-	// Ignored variables in Serialization
-
-	@Ignore
-	private String faviconUrl;
-
-	@Ignore
-	private ServerPlatform platform;
+public class InfoServer implements APIObject {
 
 	// Serialized Variables
 
@@ -93,8 +85,7 @@ public class Server implements APIObject {
 	 * @param staff
 	 * @param categories
 	 */
-	public Server(
-			String faviconUrl,
+	public InfoServer(
 			String status,
 			short id,
 			String serverId,
@@ -114,8 +105,6 @@ public class Server implements APIObject {
 			Map<String, StaffUser[]> staff,
 			String[] categories
 	) {
-		this.faviconUrl = ofNullable(faviconUrl).orElse("");
-		this.platform = ServerPlatform.JAVA;
 		this.status = status;
 		this.id = id;
 		this.serverId = serverId;
@@ -134,33 +123,6 @@ public class Server implements APIObject {
 		this.slot = slot;
 		this.staff = staff;
 		this.categories = categories;
-	}
-
-	public Server (
-			String status,
-			short id,
-			String serverId,
-			String title,
-			String address,
-			int position,
-			boolean hidden,
-			int votes,
-			int votesToday,
-			String description,
-			String versionString,
-			String[] versions,
-			boolean online,
-			int players,
-			int maxPlayers,
-			int slot,
-			Map<String, StaffUser[]> staff,
-			String[] categories
-	) {
-		this(null, status, id, serverId, title, address, position, hidden, votes, votesToday, description, versionString, versions, online, players, maxPlayers, slot, staff, categories);
-	}
-
-	public static Server fromJson(JsonObject object) {
-		return MCItaliaAPI.getGson().fromJson(object, Server.class);
 	}
 
 	public short getId() {
@@ -233,13 +195,5 @@ public class Server implements APIObject {
 
 	public boolean isOnline() {
 		return online;
-	}
-
-	public String getFaviconUrl() {
-		return ofNullable(faviconUrl).orElse(Constants.API_URL + "server/" + serverId);
-	}
-
-	public ServerPlatform getPlatform() {
-		return platform;
 	}
 }

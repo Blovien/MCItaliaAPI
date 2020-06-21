@@ -21,8 +21,11 @@ public class HttpConnectionTest {
 		connection.connect();
 		System.out.println(connection.get());*/
 
-		connection = new HttpDefaultConnection("https://www.minecraft-italia.it/api/crafting/list");
-		System.out.println(connection.get());
+		/*connection.update("https://www.minecraft-italia.it/api/crafting/list");
+		System.out.println(connection.get());*/
+
+		connection.setURL("https://www.minecraft-italia.it/forum/member.php");
+		System.out.println(connection.post("action=do_login"));
 	}
 
 	@Test

@@ -7,5 +7,4 @@ public class CraftingList extends JsonCategoryList<Crafting, CraftingCategory> {
 	public CraftingList(String status, Crafting[] items, CraftingCategory[] categories) {
 		super(status, items, categories);
 	}
-
 }
