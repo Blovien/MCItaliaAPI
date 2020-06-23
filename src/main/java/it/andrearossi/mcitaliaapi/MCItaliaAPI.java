@@ -14,7 +14,7 @@ public class MCItaliaAPI {
 
 	private static final MCItaliaAPI instance;
 
-	private boolean cacheSystem;
+	private final boolean cacheSystem;
 
 	private static final Gson gson;
 
@@ -84,6 +84,10 @@ public class MCItaliaAPI {
 
 	public static <T> T fromJson(String object, Class<T> clazz) {
 		return getGson().fromJson(object, clazz);
+	}
+
+	public static String toJson(Object object) {
+		return getGson().toJson(object);
 	}
 
 	// GETTERS

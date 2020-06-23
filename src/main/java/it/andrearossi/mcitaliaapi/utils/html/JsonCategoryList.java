@@ -1,7 +1,5 @@
 package it.andrearossi.mcitaliaapi.utils.html;
 
-import com.google.gson.JsonParser;
-
 public class JsonCategoryList<T extends APIObject, K extends JsonCategory> extends JsonList<T> {
 
 	private final K[] categories;

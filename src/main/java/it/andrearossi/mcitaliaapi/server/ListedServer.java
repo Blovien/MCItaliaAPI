@@ -12,51 +12,51 @@ public class ListedServer implements APIObject {
 	static final String NAME_LC_FIELD = "name_lc";
 	static final String VERSIONS_STRING_FIELD = "versions_string";
 
-	private short id;
+	private final short id;
 
-	private String name;
+	private final String name;
 
-	private byte votes;
+	private final byte votes;
 
-	private String url;
+	private final String url;
 
-	private boolean visible;
+	private final boolean visible;
 
-	private String address;
+	private final String address;
 
-	private String[] versions;
+	private final String[] versions;
 
-	private short players;
+	private final short players;
 
-	private short slots;
+	private final short slots;
 
-	private boolean online;
+	private final boolean online;
 
-	private boolean premium;
+	private final boolean premium;
 
-	private String[] categories;
+	private final String[] categories;
 
-	private String platform;
+	private final String platform;
 
 	@SerializedName(YAML_CONFIRMED_FIELD)
-	private boolean yamlConfirmed;
+	private final boolean yamlConfirmed;
 
 	@SerializedName(YAML_ERROR_COUNT_FIELD)
-	private byte yamlErrorCount;
+	private final byte yamlErrorCount;
 
 	@SerializedName(QUERY_ERROR_COUNT_FIELD)
-	private byte queryErrorCount;
+	private final byte queryErrorCount;
 
-	private byte position;
+	private final byte position;
 
 	@SerializedName(FAVICON_URL_FIELD)
-	private String faviconUrl;
+	private final String faviconUrl;
 
 	@SerializedName(NAME_LC_FIELD)
-	private String nameLc;
+	private final String nameLc;
 
 	@SerializedName(VERSIONS_STRING_FIELD)
-	private String versionsString;
+	private final String versionsString;
 
 	public ListedServer(
 			short id,

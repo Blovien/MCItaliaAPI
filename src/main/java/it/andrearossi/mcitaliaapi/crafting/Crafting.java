@@ -10,23 +10,23 @@ public class Crafting implements APIObject {
 	static final String URL_ITALIAN_FIELD = "url_italian";
 	static final String PRIMARY_BLOCK_FIELD = "primary_block";
 
-	private short id;
+	private final short id;
 
 	@SerializedName(ID_CATEGORY_FIELD)
-	private byte idCategory;
+	private final byte idCategory;
 
-	private String name;
+	private final String name;
 
 	@SerializedName(NAME_ITALIAN_FIELD)
-	private String nameItalian;
+	private final String nameItalian;
 
 	@SerializedName(URL_ITALIAN_FIELD)
-	private String urlItalian;
+	private final String urlItalian;
 
-	private boolean hidden;
+	private final boolean hidden;
 
 	@SerializedName(PRIMARY_BLOCK_FIELD)
-	private boolean primaryBlock;
+	private final boolean primaryBlock;
 
 	public Crafting(short id, byte idCategory, String name, String nameItalian, String urlItalian, boolean hidden, boolean primaryBlock) {
 		this.id = id;

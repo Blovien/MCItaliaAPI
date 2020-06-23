@@ -1,15 +1,9 @@
 package it.andrearossi.mcitaliaapi.server;
 
-import com.google.gson.JsonObject;
 import com.google.gson.annotations.SerializedName;
 import it.andrearossi.mcitaliaapi.utils.html.APIObject;
-import it.andrearossi.mcitaliaapi.MCItaliaAPI;
-import it.andrearossi.mcitaliaapi.utils.Constants;
-import it.andrearossi.mcitaliaapi.utils.Ignore;
 
 import java.util.Map;
-
-import static java.util.Optional.ofNullable;
 
 /**
  *
@@ -66,24 +60,6 @@ public class InfoServer implements APIObject {
 	/**
 	 * Object representing a Server in the server list of Minecraft Italia
 	 *
-	 * @param status
-	 * @param id
-	 * @param serverId
-	 * @param title
-	 * @param address
-	 * @param position
-	 * @param hidden
-	 * @param votes
-	 * @param votesToday
-	 * @param description
-	 * @param versionString
-	 * @param versions
-	 * @param online
-	 * @param players
-	 * @param maxPlayers
-	 * @param slot
-	 * @param staff
-	 * @param categories
 	 */
 	public InfoServer(
 			String status,

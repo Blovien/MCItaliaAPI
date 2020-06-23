@@ -2,12 +2,10 @@ package it.andrearossi.mcitaliaapi;
 
 import it.andrearossi.mcitaliaapi.crafting.CraftingList;
 import it.andrearossi.mcitaliaapi.news.NewsList;
-import it.andrearossi.mcitaliaapi.requests.connection.HttpDefaultConnection;
 import it.andrearossi.mcitaliaapi.requests.connection.HttpJsonConnection;
 import it.andrearossi.mcitaliaapi.server.ServerList;
 import it.andrearossi.mcitaliaapi.utils.Constants;
 
-import java.util.Optional;
 import java.util.Timer;
 import java.util.TimerTask;
 

@@ -1,5 +1,3 @@
-import com.google.gson.JsonObject;
-import it.andrearossi.mcitaliaapi.crafting.CraftingList;
 import it.andrearossi.mcitaliaapi.requests.connection.HttpDefaultConnection;
 import it.andrearossi.mcitaliaapi.requests.connection.HttpJsonConnection;
 import org.junit.jupiter.api.Test;
