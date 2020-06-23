@@ -1,5 +1,6 @@
 import it.andrearossi.mcitaliaapi.requests.connection.HttpDefaultConnection;
 import it.andrearossi.mcitaliaapi.requests.connection.HttpJsonConnection;
+import it.andrearossi.mcitaliaapi.utils.Constants;
 import org.junit.jupiter.api.Test;
 
 public class HttpConnectionTest {
@@ -15,15 +16,8 @@ public class HttpConnectionTest {
 
 		System.out.println(connection.get());
 
-		/*connection = new HttpDefaultConnection("https://www.minecraft-italia.it/crafting");
-		connection.connect();
-		System.out.println(connection.get());*/
-
-		/*connection.update("https://www.minecraft-italia.it/api/crafting/list");
-		System.out.println(connection.get());*/
-
-		connection.setURL("https://www.minecraft-italia.it/forum/member.php");
-		System.out.println(connection.post("action=do_login"));
+		connection = new HttpDefaultConnection(Constants.NEWS_LIST_URL);
+		System.out.println(connection.get());
 	}
 
 	@Test

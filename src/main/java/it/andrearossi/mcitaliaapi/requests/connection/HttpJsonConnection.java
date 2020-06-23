@@ -23,8 +23,7 @@ public class HttpJsonConnection extends HttpAbstractConnection<JsonObject> {
 		return new RunnableVal<HttpURLConnection, JsonObject>() {
 			@Override
 			public void run(HttpURLConnection connection) {
-				try {
-					Scanner scanner = new Scanner(connection.getURL().openStream());
+				try (Scanner scanner = new Scanner(connection.getURL().openStream())) {
 					String json = scanner.useDelimiter("\\Z").next();
 					JsonElement jsonElement = MCItaliaAPI.fromJson(json, JsonElement.class);
 					setValue(jsonElement.getAsJsonObject());

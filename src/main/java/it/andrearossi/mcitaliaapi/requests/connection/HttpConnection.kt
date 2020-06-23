@@ -24,12 +24,6 @@ open class HttpConnection<T>(private var url: String?, private val userAgent: St
         }
     }
 
-    fun update(url: String?) {
-        connection!!.disconnect()
-        setURL(url)
-        connect()
-    }
-
     fun getRunnable(runnable: RunnableVal<HttpURLConnection?, T>): T? {
         try {
             connection!!.requestMethod = "GET"

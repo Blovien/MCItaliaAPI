@@ -34,11 +34,11 @@ public final class MCItaliaCache {
 		HttpJsonConnection connection = new HttpJsonConnection(Constants.CRAFTING_LIST_URL);
 
 		CRAFTING_JSON_LIST = fromJson(connection.get(), CraftingList.class);
-		connection.update(Constants.SERVER_LIST_URL + "java");
+		connection = new HttpJsonConnection(Constants.SERVER_LIST_URL + "java");
 		SERVER_JAVA_JSON_LIST = fromJson(connection.get(), ServerList.class);
-		connection.update(Constants.SERVER_LIST_URL + "bedrock");
+		connection = new HttpJsonConnection(Constants.SERVER_LIST_URL + "bedrock");
 		SERVER_BEDROCK_JSON_LIST = fromJson(connection.get(), ServerList.class);
-		connection.update(Constants.NEWS_LIST_URL);
+		connection = new HttpJsonConnection(Constants.NEWS_LIST_URL);
 		NEWS_JSON_LIST = fromJson(connection.get(), NewsList.class);
 	}
 }
