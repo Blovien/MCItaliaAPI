@@ -1,28 +1,3 @@
-package it.andrearossi.mcitaliaapi.utils.html;
+package it.andrearossi.mcitaliaapi.utils.html
 
-public class JsonCategory implements APIObject {
-
-    private final short id;
-
-    private final String name;
-
-    private final String url;
-
-    public JsonCategory(short id, String name, String url) {
-        this.id = id;
-        this.name = name;
-        this.url = url;
-    }
-
-    public short getId() {
-        return id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public String getUrl() {
-        return url;
-    }
-}
+open class JsonCategory(val id: Short, val name: String, val url: String) : APIObject 
